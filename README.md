@@ -1,4 +1,4 @@
-# SOC Ransomware Incident Response Playbook (Frontend)
+# SOC Ransomware Incident Response Playbook
 
 An interactive, single-page SOC playbook website for ransomware incident response.  
 It standardizes Tier 1/Tier 2 workflows across all incident phases with escalation criteria, communication templates, legal/regulatory guidance, evidence tracking, and recovery planning.
