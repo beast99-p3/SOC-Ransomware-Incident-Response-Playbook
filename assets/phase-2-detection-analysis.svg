@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100">
+  <defs>
+    <style>
+      .title { font: 700 50px "Segoe UI", Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 23px "Segoe UI", Arial, sans-serif; fill: #0f172a; text-anchor: middle; dominant-baseline: middle; }
+      .decision-label { font: 600 20px "Segoe UI", Arial, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .small { font: 600 21px "Segoe UI", Arial, sans-serif; fill: #475569; text-anchor: middle; dominant-baseline: middle; }
+      .box { fill: #ffffff; stroke: #0f172a; stroke-width: 2.8; rx: 14; }
+      .decision { fill: #ffffff; stroke: #0f172a; stroke-width: 2.8; }
+      .flow { stroke: #0f172a; stroke-width: 2.8; fill: none; marker-end: url(#arrow); }
+      .assist { stroke: #334155; stroke-width: 2.8; fill: none; stroke-dasharray: 10 8; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10.5" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect width="1800" height="1100" fill="#ffffff"/>
+  <text x="90" y="95" class="title">Phase 2 - Detection and Analysis</text>
+
+  <rect x="120" y="220" width="300" height="120" class="box"/>
+  <text x="270" y="280" class="label">Alert Triggered</text>
+
+  <polygon points="700,210 830,280 700,350 570,280" class="decision"/>
+  <text x="700" y="286" class="decision-label">Likely ransomware?</text>
+
+  <rect x="930" y="220" width="300" height="120" class="box"/>
+  <text x="1080" y="280" class="label">Tier 1 Triage</text>
+
+  <polygon points="1390,210 1530,280 1390,350 1250,280" class="decision"/>
+  <text x="1390" y="272" class="decision-label">
+    <tspan x="1390" dy="0">Escalation</tspan>
+    <tspan x="1390" dy="24">criteria met?</tspan>
+  </text>
+
+  <rect x="1080" y="620" width="320" height="110" class="box"/>
+  <text x="1240" y="675" class="label">Tier 2 Investigation</text>
+
+  <rect x="720" y="620" width="300" height="110" class="box"/>
+  <text x="870" y="675" class="label">Classify Severity</text>
+
+  <rect x="720" y="800" width="360" height="110" class="box"/>
+  <text x="900" y="855" class="label">Define Scope + Hypothesis</text>
+
+  <rect x="380" y="800" width="260" height="100" class="box"/>
+  <text x="510" y="850" class="label">Close Benign</text>
+
+  <path d="M 420 280 L 570 280" class="flow"/>
+  <path d="M 830 280 L 930 280" class="flow"/>
+  <path d="M 1230 280 L 1250 280" class="flow"/>
+  <path d="M 1390 350 L 1390 560 L 1240 560 L 1240 620" class="flow"/>
+  <path d="M 1080 675 L 1020 675" class="flow"/>
+  <path d="M 870 730 L 870 800" class="flow"/>
+  <path d="M 700 350 L 700 850 L 640 850" class="assist"/>
+
+  <text x="870" y="255" class="small">Yes</text>
+  <text x="735" y="390" class="small">No</text>
+  <text x="1425" y="390" class="small">Yes</text>
+  <text x="675" y="825" class="small">No</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100">
+  <defs>
+    <style>
+      .title { font: 700 50px "Segoe UI", Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 23px "Segoe UI", Arial, sans-serif; fill: #0f172a; text-anchor: middle; dominant-baseline: middle; }
+      .decision-label { font: 600 20px "Segoe UI", Arial, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .small { font: 600 21px "Segoe UI", Arial, sans-serif; fill: #475569; text-anchor: middle; dominant-baseline: middle; }
+      .box { fill: #ffffff; stroke: #0f172a; stroke-width: 2.8; rx: 14; }
+      .decision { fill: #ffffff; stroke: #0f172a; stroke-width: 2.8; }
+      .flow { stroke: #0f172a; stroke-width: 2.8; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10.5" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect width="1800" height="1100" fill="#ffffff"/>
+  <text x="90" y="95" class="title">Phase 3 - Containment</text>
+
+  <rect x="120" y="220" width="300" height="120" class="box"/>
+  <text x="270" y="280" class="label">Identify Affected Hosts</text>
+
+  <rect x="500" y="220" width="300" height="120" class="box"/>
+  <text x="650" y="280" class="label">Isolate Endpoints</text>
+
+  <rect x="880" y="220" width="320" height="120" class="box"/>
+  <text x="1040" y="280" class="label">Disable Accounts</text>
+
+  <polygon points="1430,210 1570,280 1430,350 1290,280" class="decision"/>
+  <text x="1430" y="272" class="decision-label">
+    <tspan x="1430" dy="0">Lateral movement</tspan>
+    <tspan x="1430" dy="24">active?</tspan>
+  </text>
+
+  <rect x="1050" y="620" width="400" height="110" class="box"/>
+  <text x="1250" y="675" class="label">Segment Network + Block IOCs</text>
+
+  <rect x="600" y="620" width="360" height="110" class="box"/>
+  <text x="780" y="675" class="label">Preserve Evidence + Monitor</text>
+
+  <rect x="840" y="820" width="380" height="110" class="box"/>
+  <text x="1030" y="875" class="label">Containment Complete</text>
+
+  <path d="M 420 280 L 500 280" class="flow"/>
+  <path d="M 800 280 L 880 280" class="flow"/>
+  <path d="M 1200 280 L 1290 280" class="flow"/>
+  <path d="M 1430 350 L 1430 560 L 1250 560 L 1250 620" class="flow"/>
+  <path d="M 1290 280 L 1150 280 L 1150 560 L 780 560 L 780 620" class="flow"/>
+  <path d="M 1250 730 L 1250 760 L 1030 760 L 1030 820" class="flow"/>
+  <path d="M 780 730 L 780 760 L 930 760 L 930 820" class="flow"/>
+
+  <text x="1465" y="390" class="small">Yes</text>
+  <text x="1190" y="305" class="small">No</text>
+</svg>

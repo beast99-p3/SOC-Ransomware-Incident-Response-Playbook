@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SOC Ransomware Playbook</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <h1>SOC Ransomware Incident Response Playbook</h1>
+        <a class="btn btn-outline" href="./Ransomware-Incident-Response-Playbook.md" target="_blank" rel="noreferrer">Open Markdown</a>
+      </div>
+    </header>
+
+    <nav class="section-nav" aria-label="Playbook sections">
+      <div class="container section-nav-inner">
+        <a class="section-link" href="#roles">Roles</a>
+        <a class="section-link" href="#phases">Phases</a>
+        <a class="section-link" href="#ops-kit">Ops Kit</a>
+        <a class="section-link" href="#escalation">Escalation</a>
+        <a class="section-link" href="#legal-flow">Legal Flow</a>
+        <a class="section-link" href="#tracker">Tracker</a>
+        <a class="section-link" href="#tooling">Tooling</a>
+        <a class="section-link" href="#closure">Closure</a>
+        <a class="section-link" href="#notification-matrix">Notification Matrix</a>
+        <a class="section-link" href="#timeline">Timeline</a>
+        <a class="section-link" href="#templates">Templates</a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section class="hero card">
+        <div>
+          <p class="eyebrow">Standardized Workflow</p>
+          <h2>Detect, Escalate, Contain, Recover, Improve</h2>
+          <p>
+            This frontend summarizes your ransomware playbook into an operational view for SOC analysts, responders, and leadership.
+            Use it during incidents for role clarity, escalation decisions, and ready-to-send communications.
+          </p>
+          <div class="hero-actions">
+            <a href="#phases" class="btn">View Response Phases</a>
+            <a href="#templates" class="btn btn-outline">Communication Templates</a>
+            <a href="#ops-kit" class="btn btn-outline">Operational Kit</a>
+            <a href="#timeline" class="btn btn-outline">Timeline Tracker</a>
+            <button id="print-snapshot" class="btn btn-outline" type="button">Print / Export Snapshot</button>
+            <button id="reset-local-data" class="btn btn-reset" type="button">Reset Saved Data</button>
+          </div>
+        </div>
+        <div class="severity-panel">
+          <h3>Severity Model</h3>
+          <ul>
+            <li><strong>SEV-1:</strong> Active encryption on critical systems, domain compromise, backup impact, or probable regulatory/customer impact.</li>
+            <li><strong>SEV-2:</strong> Confirmed ransomware behavior on limited hosts.</li>
+            <li><strong>SEV-3:</strong> Suspicious indicators, not yet confirmed.</li>
+            <li><strong>SEV-4:</strong> False positive or informational.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="roles" class="section">
+        <h2>Tiered Roles</h2>
+        <div class="cards-3">
+          <article class="card">
+            <h3>Tier 1 Analyst</h3>
+            <p class="muted">Monitor, triage, execute immediate controls, and escalate.</p>
+            <ul>
+              <li>Validate alerts and gather minimum evidence bundle.</li>
+              <li>Run first-pass checks across SIEM/EDR/email/proxy.</li>
+              <li>Apply approved actions (host isolation, account disablement).</li>
+              <li>Escalate when criteria are met and maintain incident timeline.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Tier 2 Analyst</h3>
+            <p class="muted">Lead deep investigation, containment strategy, and recovery validation.</p>
+            <ul>
+              <li>Determine patient zero, spread path, and potential exfiltration.</li>
+              <li>Coordinate containment with IT and Identity teams.</li>
+              <li>Hunt for related IOCs and persistence mechanisms.</li>
+              <li>Approve safe restoration and hardening actions.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Incident Commander</h3>
+            <p class="muted">Own cross-team decisions and executive coordination.</p>
+            <ul>
+              <li>Set priorities and approve risk tradeoffs.</li>
+              <li>Authorize phase transitions and closure criteria.</li>
+              <li>Drive leadership communication cadence.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="phases" class="section">
+        <h2>Response Phases</h2>
+        <div class="phase-grid">
+          <article class="card phase-card">
+            <h3>Phase 1: Preparation</h3>
+            <img src="./assets/phase-1-preparation.svg" alt="Phase 1 preparation workflow diagram" />
+            <p><strong>Exit criteria:</strong> Monitoring and on-call validated, backup status known, runbook current.</p>
+          </article>
+
+          <article class="card phase-card">
+            <h3>Phase 2: Detection and Analysis</h3>
+            <img src="./assets/phase-2-detection-analysis.svg" alt="Phase 2 detection and analysis workflow diagram" />
+            <p><strong>Exit criteria:</strong> Incident classified, severity assigned, escalation path active.</p>
+          </article>
+
+          <article class="card phase-card">
+            <h3>Phase 3: Containment</h3>
+            <img src="./assets/phase-3-containment.svg" alt="Phase 3 containment workflow diagram" />
+            <p><strong>Exit criteria:</strong> No active spread, containment boundaries stable, critical assets protected.</p>
+          </article>
+
+          <article class="card phase-card">
+            <h3>Phase 4: Eradication and Recovery</h3>
+            <img src="./assets/phase-4-eradication-recovery.svg" alt="Phase 4 eradication and recovery workflow diagram" />
+            <p><strong>Exit criteria:</strong> Artifacts removed, exploited path remediated, systems restored and validated.</p>
+          </article>
+
+          <article class="card phase-card">
+            <h3>Phase 5: Post-Incident Improvement</h3>
+            <img src="./assets/phase-5-post-incident.svg" alt="Phase 5 post incident improvement workflow diagram" />
+            <p><strong>Exit criteria:</strong> Final report delivered, actions owned, detections updated.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="ops-kit" class="section">
+        <h2>Operational Kit</h2>
+        <div class="cards-2">
+          <article class="card">
+            <h3>First 60 Minutes Checklist</h3>
+            <p class="muted">Use this as the immediate execution checklist for SEV-1/SEV-2 ransomware candidates.</p>
+            <ul class="checklist" id="first-hour-checklist">
+              <li><label><input type="checkbox" /> Confirm alert fidelity and classify severity candidate.</label></li>
+              <li><label><input type="checkbox" /> Isolate confirmed/suspected impacted endpoints.</label></li>
+              <li><label><input type="checkbox" /> Disable compromised accounts and revoke active sessions.</label></li>
+              <li><label><input type="checkbox" /> Notify Tier 2 and Incident Commander if escalation triggers match.</label></li>
+              <li><label><input type="checkbox" /> Start incident bridge and assign recorder/timeline owner.</label></li>
+              <li><label><input type="checkbox" /> Preserve critical forensic evidence before destructive actions.</label></li>
+            </ul>
+            <p class="muted"><strong>Progress:</strong> <span id="checklist-progress">0/6 completed</span></p>
+          </article>
+
+          <article class="card">
+            <h3>RACI Decision Matrix</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Decision / Action</th>
+                  <th>Tier 1</th>
+                  <th>Tier 2</th>
+                  <th>IC</th>
+                  <th>Legal</th>
+                  <th>IT Ops</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Isolate endpoint</td>
+                  <td>R</td>
+                  <td>A</td>
+                  <td>C</td>
+                  <td>I</td>
+                  <td>C</td>
+                </tr>
+                <tr>
+                  <td>Disable privileged account</td>
+                  <td>R</td>
+                  <td>A</td>
+                  <td>C</td>
+                  <td>I</td>
+                  <td>C</td>
+                </tr>
+                <tr>
+                  <td>Network segmentation</td>
+                  <td>I</td>
+                  <td>R</td>
+                  <td>A</td>
+                  <td>I</td>
+                  <td>R</td>
+                </tr>
+                <tr>
+                  <td>Regulatory notification trigger</td>
+                  <td>I</td>
+                  <td>C</td>
+                  <td>A</td>
+                  <td>R</td>
+                  <td>I</td>
+                </tr>
+                <tr>
+                  <td>Executive external statement</td>
+                  <td>I</td>
+                  <td>C</td>
+                  <td>A</td>
+                  <td>R</td>
+                  <td>I</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="muted">Legend: R = Responsible, A = Accountable, C = Consulted, I = Informed.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="escalation" class="section">
+        <h2>Escalation Matrix</h2>
+        <div class="cards-2">
+          <article class="card">
+            <h3>Escalate Immediately If Any Trigger Occurs</h3>
+            <ul>
+              <li>Encryption behavior confirmed (renames/extensions/ransom note).</li>
+              <li>Same indicator appears on 2+ hosts within 30 minutes.</li>
+              <li>Privileged account abuse is suspected.</li>
+              <li>Backups, hypervisors, or identity infrastructure are affected.</li>
+              <li>Exfiltration signals are present.</li>
+              <li>Critical business services are degraded or unavailable.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Timing Targets</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Milestone</th>
+                  <th>Target</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tier 1 triage starts</td>
+                  <td>&lt;= 15 min</td>
+                </tr>
+                <tr>
+                  <td>Tier 2 engaged after trigger</td>
+                  <td>&lt;= 15 min</td>
+                </tr>
+                <tr>
+                  <td>Incident Commander engaged (SEV-1)</td>
+                  <td>&lt;= 30 min</td>
+                </tr>
+                <tr>
+                  <td>Executive notification (confirmed SEV-1)</td>
+                  <td>&lt;= 60 min</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+
+      <section id="legal-flow" class="section">
+        <h2>Legal and Regulatory Decision Flow</h2>
+        <div class="cards-2">
+          <article class="card">
+            <h3>Decision Path</h3>
+            <ol class="decision-flow">
+              <li><strong>Confirmed ransomware event?</strong> If yes, activate legal hold and preserve evidence.</li>
+              <li><strong>Sensitive data potentially exposed?</strong> If yes, notify legal/compliance immediately.</li>
+              <li><strong>Exfiltration indicators present?</strong> If yes, perform breach impact assessment.</li>
+              <li><strong>Regulatory threshold crossed?</strong> If yes, trigger notification workflow by jurisdiction and contract.</li>
+              <li><strong>External communications required?</strong> Route through legal + executive approval.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>Mandatory Legal Artifacts</h3>
+            <ul>
+              <li>Legal hold notice issued timestamp and recipients.</li>
+              <li>Data category assessment (PII/PHI/PCI/IP) with confidence level.</li>
+              <li>Regulatory and contractual obligations checklist.</li>
+              <li>Counsel-approved external communication draft.</li>
+              <li>Final decision log for notification/no-notification rationale.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="tracker" class="section">
+        <h2>Evidence and Recovery Tracker</h2>
+        <div class="cards-2">
+          <article class="card">
+            <h3>Evidence Collection Board</h3>
+            <table class="status-table">
+              <thead>
+                <tr>
+                  <th>Artifact</th>
+                  <th>Owner</th>
+                  <th>Status</th>
+                  <th>Last Update</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>EDR process tree export</td>
+                  <td>Tier 1</td>
+                  <td><span class="badge done">Complete</span></td>
+                  <td>00:25</td>
+                </tr>
+                <tr>
+                  <td>Privileged authentication logs</td>
+                  <td>Tier 2</td>
+                  <td><span class="badge progress">In progress</span></td>
+                  <td>00:40</td>
+                </tr>
+                <tr>
+                  <td>Firewall/proxy exfil logs</td>
+                  <td>Tier 2</td>
+                  <td><span class="badge progress">In progress</span></td>
+                  <td>00:43</td>
+                </tr>
+                <tr>
+                  <td>Forensic image + hash manifest</td>
+                  <td>IR Partner</td>
+                  <td><span class="badge hold">Pending</span></td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="card">
+            <h3>Recovery Priority Board</h3>
+            <table class="status-table">
+              <thead>
+                <tr>
+                  <th>System</th>
+                  <th>Priority</th>
+                  <th>RTO</th>
+                  <th>Current State</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Identity (AD / IAM)</td>
+                  <td>P0</td>
+                  <td>2 hrs</td>
+                  <td><span class="badge progress">Restoring</span></td>
+                </tr>
+                <tr>
+                  <td>Core business app</td>
+                  <td>P1</td>
+                  <td>4 hrs</td>
+                  <td><span class="badge hold">Queued</span></td>
+                </tr>
+                <tr>
+                  <td>File services</td>
+                  <td>P1</td>
+                  <td>6 hrs</td>
+                  <td><span class="badge hold">Queued</span></td>
+                </tr>
+                <tr>
+                  <td>User endpoints wave 1</td>
+                  <td>P2</td>
+                  <td>8 hrs</td>
+                  <td><span class="badge done">Validated</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+
+      <section id="tooling" class="section">
+        <h2>Tool-Specific Hunt and Containment Queries</h2>
+        <div class="cards-2">
+          <article class="card">
+            <h3>Microsoft Sentinel (KQL)</h3>
+            <pre id="query-sentinel">DeviceProcessEvents
+| where Timestamp > ago(24h)
+| where ProcessCommandLine has_any ("vssadmin delete shadows", "wbadmin delete catalog", "bcdedit /set {default} recoveryenabled no")
+| project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by Timestamp desc</pre>
+            <button class="btn copy-query" data-copy-target="query-sentinel">Copy Query</button>
+          </article>
+          <article class="card">
+            <h3>Splunk (SPL)</h3>
+            <pre id="query-splunk">index=edr OR index=sysmon earliest=-24h
+("vssadmin delete shadows" OR "wbadmin delete catalog" OR "bcdedit /set {default} recoveryenabled no")
+| stats earliest(_time) as firstSeen latest(_time) as lastSeen count by host user process_name process
+| sort - count</pre>
+            <button class="btn copy-query" data-copy-target="query-splunk">Copy Query</button>
+          </article>
+          <article class="card">
+            <h3>Microsoft Defender Advanced Hunting</h3>
+            <pre id="query-mde">DeviceFileEvents
+| where Timestamp > ago(12h)
+| where ActionType in ("FileRenamed", "FileCreated")
+| where FileName endswith ".lockbit" or FileName endswith ".encrypted" or FileName endswith ".crypt"
+| summarize affectedFiles=count(), dcount(FileName) by DeviceName, bin(Timestamp, 15m)
+| order by affectedFiles desc</pre>
+            <button class="btn copy-query" data-copy-target="query-mde">Copy Query</button>
+          </article>
+          <article class="card">
+            <h3>CrowdStrike (FQL example)</h3>
+            <pre id="query-cs">event_simpleName:'ProcessRollup2'+CommandLine:'*vssadmin*delete*shadows*'
+OR event_simpleName:'ProcessRollup2'+CommandLine:'*wbadmin*delete*catalog*'
+OR event_simpleName:'ProcessRollup2'+CommandLine:'*bcdedit*/set*recoveryenabled*no*'</pre>
+            <button class="btn copy-query" data-copy-target="query-cs">Copy Query</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="closure" class="section">
+        <h2>Closure and Reopen Criteria</h2>
+        <div class="cards-2">
+          <article class="card">
+            <h3>Incident Closure Checklist</h3>
+            <ul>
+              <li>All impacted assets identified, contained, and validated as clean.</li>
+              <li>Persistence and initial access vector remediated with evidence.</li>
+              <li>Critical services restored and monitored for 24-72 hours without relapse.</li>
+              <li>Required legal/compliance decisions documented and approved.</li>
+              <li>Executive closeout and lessons-learned meeting completed.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Reopen Triggers</h3>
+            <ul>
+              <li>New encryption or ransom-note indicators on any related asset.</li>
+              <li>Delayed discovery of exfiltration or backup compromise evidence.</li>
+              <li>Dormant persistence / C2 callback on previously scoped systems.</li>
+              <li>Regulatory impact status changes (new data classes discovered).</li>
+              <li>Failed recovery validation in production environment.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="notification-matrix" class="section">
+        <h2>Jurisdiction and Contract Notification Matrix</h2>
+        <article class="card">
+          <p class="muted">Use as a triage aid. Always confirm final obligations with legal counsel.</p>
+          <table class="status-table">
+            <thead>
+              <tr>
+                <th>Trigger Type</th>
+                <th>Example Scope</th>
+                <th>Notify</th>
+                <th>Target Time</th>
+                <th>Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Personal data breach</td>
+                <td>PII in employee/customer systems</td>
+                <td>Privacy office + legal + regulator (if threshold met)</td>
+                <td>Within 24-72h per jurisdiction</td>
+                <td>Legal (A), IC (C)</td>
+              </tr>
+              <tr>
+                <td>Healthcare data impact</td>
+                <td>PHI exposure or access uncertainty</td>
+                <td>Compliance, legal, affected entities</td>
+                <td>Per HIPAA/HITECH timelines</td>
+                <td>Compliance (R), Legal (A)</td>
+              </tr>
+              <tr>
+                <td>Payment card scope</td>
+                <td>Cardholder environment touched</td>
+                <td>PCI team, acquiring bank, card brands</td>
+                <td>Immediate contractual notice</td>
+                <td>PCI Owner (R), Legal (A)</td>
+              </tr>
+              <tr>
+                <td>Customer contractual breach clause</td>
+                <td>SLA/MSA security notification language triggered</td>
+                <td>Customer success + account legal contacts</td>
+                <td>As defined in contract (often 24-48h)</td>
+                <td>Legal (A), Account Team (R)</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
+
+      <section id="timeline" class="section">
+        <h2>Incident Timeline and After-Action Tracker</h2>
+        <div class="cards-2">
+          <article class="card">
+            <h3>Add Timeline Event</h3>
+            <div class="timeline-form">
+              <label>
+                Time (UTC)
+                <input id="timeline-time" type="datetime-local" />
+              </label>
+              <label>
+                Owner
+                <input id="timeline-owner" type="text" placeholder="Tier 1 / Tier 2 / IC / IT Ops" />
+              </label>
+              <label>
+                Event
+                <textarea id="timeline-event" rows="3" placeholder="Describe action, observation, or decision"></textarea>
+              </label>
+              <button id="timeline-add" class="btn">Add Event</button>
+            </div>
+          </article>
+          <article class="card">
+            <h3>After-Action Items</h3>
+            <table class="status-table">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Owner</th>
+                  <th>Due</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Deploy shadow-copy tamper detection rule</td>
+                  <td>Detection Eng</td>
+                  <td>+7 days</td>
+                  <td><span class="badge progress">In progress</span></td>
+                </tr>
+                <tr>
+                  <td>Harden backup admin segmentation</td>
+                  <td>Infra Sec</td>
+                  <td>+14 days</td>
+                  <td><span class="badge hold">Pending</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+        <article class="card">
+          <div class="timeline-header">
+            <h3>Incident Timeline Log</h3>
+            <button id="timeline-export" class="btn">Export CSV</button>
+          </div>
+          <table id="timeline-table" class="status-table">
+            <thead>
+              <tr>
+                <th>Time (UTC)</th>
+                <th>Owner</th>
+                <th>Event</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2026-03-12 14:10</td>
+                <td>Tier 1</td>
+                <td>Ransomware alert validated; host isolation initiated.</td>
+              </tr>
+              <tr>
+                <td>2026-03-12 14:22</td>
+                <td>Tier 2</td>
+                <td>Escalation criteria met; incident bridge activated.</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
+
+      <section id="templates" class="section">
+        <h2>Communication Templates</h2>
+        <div class="template-tabs" role="tablist" aria-label="Communication templates">
+          <button class="tab-btn active" data-template="internal" role="tab">Internal SOC Alert</button>
+          <button class="tab-btn" data-template="itops" role="tab">IT Ops Request</button>
+          <button class="tab-btn" data-template="executive" role="tab">Executive Update</button>
+          <button class="tab-btn" data-template="legal" role="tab">Legal Trigger</button>
+          <button class="tab-btn" data-template="handoff" role="tab">Shift Handoff</button>
+        </div>
+        <article class="card">
+          <p id="template-channel" class="muted"></p>
+          <pre id="template-body"></pre>
+          <button id="copy-template" class="btn">Copy Template</button>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Owner: SOC Manager | Version: 1.0 | Last updated: 2026-03-12</p>
+      </div>
+    </footer>
+
+    <button id="to-top-btn" class="to-top" aria-label="Back to top" title="Back to top">
+      ↑
+    </button>
+
+    <script src="./app.js"></script>
+  </body>
+  </html>

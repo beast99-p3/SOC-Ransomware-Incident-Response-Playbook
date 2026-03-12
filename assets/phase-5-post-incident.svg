@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title { font: 700 44px "Segoe UI", Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 24px "Segoe UI", Arial, sans-serif; fill: #0f172a; text-anchor: middle; dominant-baseline: middle; }
+      .small { font: 600 19px "Segoe UI", Arial, sans-serif; fill: #334155; text-anchor: middle; dominant-baseline: middle; }
+      .box { fill: #f8fafc; stroke: #0f172a; stroke-width: 2.5; rx: 14; }
+      .decision { fill: #ffffff; stroke: #0f172a; stroke-width: 2.5; }
+      .flow { stroke: #0f172a; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .loop { stroke: #475569; stroke-width: 2.5; fill: none; stroke-dasharray: 10 8; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10.5" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="900" fill="#ffffff"/>
+  <text x="70" y="80" class="title">Phase 5 - Post-Incident Improvement</text>
+
+  <rect x="90" y="180" width="310" height="110" class="box"/>
+  <text x="245" y="235" class="label">Lessons Learned Review</text>
+
+  <rect x="480" y="180" width="340" height="110" class="box"/>
+  <text x="650" y="235" class="label">Update Detections and SOPs</text>
+
+  <rect x="900" y="180" width="350" height="110" class="box"/>
+  <text x="1075" y="235" class="label">Assign Remediation Owners</text>
+
+  <polygon points="700,360 860,450 700,540 540,450" class="decision"/>
+  <text x="700" y="450" class="label">Actions completed?</text>
+
+  <rect x="960" y="400" width="320" height="100" class="box"/>
+  <text x="1120" y="450" class="label">Executive Closeout Report</text>
+
+  <rect x="500" y="650" width="400" height="110" class="box"/>
+  <text x="700" y="705" class="label">Track Overdue Actions</text>
+
+  <path d="M 400 235 L 480 235" class="flow"/>
+  <path d="M 820 235 L 900 235" class="flow"/>
+  <path d="M 1075 290 L 1075 335 L 700 335 L 700 360" class="flow"/>
+  <path d="M 860 450 L 960 450" class="flow"/>
+  <path d="M 700 540 L 700 650" class="flow"/>
+  <path d="M 900 705 L 1080 705 L 1080 540 L 760 540" class="loop"/>
+
+  <text x="910" y="425" class="small">Yes</text>
+  <text x="730" y="595" class="small">No</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title { font: 700 44px "Segoe UI", Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 24px "Segoe UI", Arial, sans-serif; fill: #0f172a; text-anchor: middle; dominant-baseline: middle; }
+      .small { font: 600 19px "Segoe UI", Arial, sans-serif; fill: #334155; text-anchor: middle; dominant-baseline: middle; }
+      .box { fill: #f8fafc; stroke: #0f172a; stroke-width: 2.5; rx: 14; }
+      .decision { fill: #ffffff; stroke: #0f172a; stroke-width: 2.5; }
+      .flow { stroke: #0f172a; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .loop { stroke: #475569; stroke-width: 2.5; fill: none; stroke-dasharray: 10 8; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10.5" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="900" fill="#ffffff"/>
+  <text x="70" y="80" class="title">Phase 4 - Eradication and Recovery</text>
+
+  <rect x="90" y="180" width="330" height="110" class="box"/>
+  <text x="255" y="235" class="label">Remove Malware and IOCs</text>
+
+  <rect x="500" y="180" width="280" height="110" class="box"/>
+  <text x="640" y="235" class="label">Patch Weaknesses</text>
+
+  <rect x="860" y="180" width="370" height="110" class="box"/>
+  <text x="1045" y="235" class="label">Restore from Clean Backup</text>
+
+  <polygon points="690,360 850,450 690,540 530,450" class="decision"/>
+  <text x="690" y="450" class="label">Validation passed?</text>
+
+  <rect x="930" y="400" width="330" height="100" class="box"/>
+  <text x="1095" y="450" class="label">Return to Production</text>
+
+  <rect x="500" y="650" width="380" height="110" class="box"/>
+  <text x="690" y="705" class="label">Re-clean and Re-validate</text>
+
+  <path d="M 420 235 L 500 235" class="flow"/>
+  <path d="M 780 235 L 860 235" class="flow"/>
+  <path d="M 1045 290 L 1045 335 L 690 335 L 690 360" class="flow"/>
+  <path d="M 850 450 L 930 450" class="flow"/>
+  <path d="M 690 540 L 690 650" class="flow"/>
+  <path d="M 690 650 L 690 540" class="loop"/>
+
+  <text x="890" y="425" class="small">Yes</text>
+  <text x="720" y="595" class="small">No</text>
+</svg>

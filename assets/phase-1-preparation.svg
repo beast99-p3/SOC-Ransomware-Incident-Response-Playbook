@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title { font: 700 44px "Segoe UI", Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 24px "Segoe UI", Arial, sans-serif; fill: #0f172a; text-anchor: middle; dominant-baseline: middle; }
+      .small { font: 600 19px "Segoe UI", Arial, sans-serif; fill: #334155; text-anchor: middle; dominant-baseline: middle; }
+      .box { fill: #f8fafc; stroke: #0f172a; stroke-width: 2.5; rx: 14; }
+      .decision { fill: #ffffff; stroke: #0f172a; stroke-width: 2.5; }
+      .flow { stroke: #0f172a; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .loop { stroke: #475569; stroke-width: 2.5; fill: none; stroke-dasharray: 10 8; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10.5" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="900" fill="#ffffff"/>
+  <text x="70" y="80" class="title">Phase 1 - Preparation</text>
+
+  <rect x="90" y="170" width="320" height="110" class="box"/>
+  <text x="250" y="225" class="label">Validate IR Contacts</text>
+
+  <rect x="480" y="170" width="340" height="110" class="box"/>
+  <text x="650" y="225" class="label">Confirm SIEM / EDR Coverage</text>
+
+  <rect x="890" y="170" width="320" height="110" class="box"/>
+  <text x="1050" y="225" class="label">Verify Backup Health</text>
+
+  <polygon points="700,370 840,470 700,570 560,470" class="decision"/>
+  <text x="700" y="470" class="label">Any gaps found?</text>
+
+  <rect x="980" y="420" width="280" height="100" class="box"/>
+  <text x="1120" y="470" class="label">Remediate Gaps</text>
+
+  <rect x="500" y="650" width="400" height="110" class="box"/>
+  <text x="700" y="705" class="label">Preparation Complete</text>
+
+  <path d="M 410 225 L 480 225" class="flow"/>
+  <path d="M 820 225 L 890 225" class="flow"/>
+  <path d="M 1050 280 L 1050 330 L 700 330 L 700 370" class="flow"/>
+  <path d="M 840 470 L 980 470" class="flow"/>
+  <path d="M 700 570 L 700 650" class="flow"/>
+  <path d="M 1120 520 L 1120 620 L 760 620" class="loop"/>
+
+  <text x="910" y="445" class="small">Yes</text>
+  <text x="730" y="615" class="small">No</text>
+</svg>
